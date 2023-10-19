@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .left-panel {
+            flex: 0.15;
+            background-color: #1e1f26;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .left-panel-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .left-panel-buttons button {
+            margin: 10px 0;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .right-panel {
+            flex: 1;
+            background-color: #252830;
+            min-height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+            position: relative;
+        }
+
+        .logo {
+            margin-top: 20px;
+            width: 150px;
+            height: auto;
+            cursor: pointer;
+        }
+
+        .course-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .course-box {
+            width: calc(33.33% - 20px);
+            margin-bottom: 40px;
+            background-color: #333942;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-box img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-title {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .course-description {
+            font-size: 16px;
+            color: #ccc;
+        }
+
+        .course-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .search-container {
+            background-color: #333942;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            width: 80%;
+            display: flex;
+            position: relative;
+        }
+
+        .search-container input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 5px;
+            width: 100%;
+            background-color: #1e1f26;
+            color: #fff;
+        }
+
+        .search-container input[type="text"]:focus {
+            outline: none;
+        }
+
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #f5f5dc;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            display: none;
+            flex-direction: column;
+            z-index: 1;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .search-suggestion {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-suggestion:hover {
+            background-color: #f1f1f1;
+        }
+
+        .back-button-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            width: 100%;
+            z-index: 9999; /* Make sure it's on top */
+        }
+
+        .back-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="left-panel">
+        <a href="index.html">
+            <img class="logo" src="mylogo.png" alt="Logo">
+        </a>
+        <div class="left-panel-buttons">
+            <button onclick="openCourses()">Explore Courses</button>
+            <button onclick="openPage('upcoming_events.html')">Upcoming Events</button>
+            <button onclick="openPage('simplify.html')">Simplify</button>
+            <button onclick="openPage('help.html')">Help</button>
+        </div>
+    </div>
+    <div class="right-panel" id="rightPanel">
+        <div class="search-container">
+            <input type="text" id="courseSearch" placeholder="Search LearnMe...">
+            <div class="search-suggestions" id="searchSuggestions"></div>
+        </div>
+
+        <div class="course-container">
+            <div class="course-box" onclick="openCourse('c_intro.html')">
+                <img src="c_icon.png" alt="C Icon">
+                <div class="course-content">
+                    <div class="course-title">Introduction to C</div>
+                    <div class="course-description">Learn the basics of the C programming language.</div>
+                </div>
+            </div>
+            <div class="course-box" onclick="openCourse('c_intermediate.html')">
+                <img src="c_intermediate_icon.png" alt="C Intermediate Icon">
+                <div class="course-content">
+                    <div class="course-title">C Intermediate</div>
+                    <div class="course-description">Take your C programming skills to the next level.</div>
+                </div>
+            </div>
+            <div class="course-box" onclick="openCourse('cpp_intro.html')">
+                <img src="cpp_icon.png" alt="C++ Icon">
+                <div class="course-content">
+                    <div class="course-title">Introduction to C++</div>
+                    <div class="course-description">Get started with the C++ programming language.</div>
+                </div>
+            </div>
+            <div class="course-box" onclick="openCourse('python_intro.html')">
+                <img src="python_icon.png" alt="Python Icon">
+                <div class="course-content">
+                    <div class="course-title">Python</div>
+                    <div class="course-description">Learn one of the most popular programming languages.</div>
+                </div>
+            </div>
+            <div class="course-box" onclick="openCourse('java_intro.html')">
+                <img src="java_icon.png" alt="Java Icon">
+                <div class="course-content">
+                    <div class="course-title">Introduction to Java</div>
+                    <div class="course-description">Start your journey with the Java programming language.</div>
+                </div>
+            </div>
+            <div class="course-box" onclick="openCourse('web_dev.html')">
+                <img src="web_dev_icon.webp" alt="Web Development Icon">
+                <div class="course-content">
+                    <div class="course-title">Basics of Web Development</div>
+                    <div class="course-description">Learn the essentials of web development.</div>
+                </div>
+            </div>
+            <div class="course-box" onclick="openCourse('typescript.html')">
+                <img src="typescript_icon.png" alt="TypeScript Icon">
+                <div class="course-content">
+                    <div class="course-title">TypeScript</div>
+                    <div class="course-description">Discover the benefits of TypeScript in development.</div>
+                </div>
+            </div>
+            <div class="course-box" onclick="openCourse('dbms.html')">
+                <img src="dbms_icon.png" alt="DBMS Icon">
+                <div class="course-content">
+                    <div class="course-title">Database Management System (DBMS)</div>
+                    <div class="course-description">Learn about managing and interacting with databases.</div>
+                </div>
+            </div>            
+            <div class="course-box" onclick="openCourse('dsa.html')">
+                <img src="dsa_icon.png" alt="DSA Icon">
+                <div class="course-content">
+                    <div class="course-title">DSA</div>
+                    <div class="course-description">Master data structures and algorithms.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openCourse(coursePage) {
+            var rightPanel = document.getElementById('rightPanel');
+            rightPanel.innerHTML = '';
+            var iframe = document.createElement('iframe');
+            iframe.src = coursePage;
+            iframe.style.border = 'none';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            rightPanel.appendChild(iframe);
+        }
+
+        function openPage(page) {
+            var rightPanel = document.getElementById('rightPanel');
+            rightPanel.innerHTML = '';
+            var iframe = document.createElement('iframe');
+            iframe.src = page;
+            iframe.style.border = 'none';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            rightPanel.appendChild(iframe);
+
+        }
+
+        function openCourses() {
+            parent.window.location.href = 'explore_courses.html';
+        }
+
+        document.getElementById('courseSearch').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                searchCourse();
+            }
+        });
+
+        function searchCourse() {
+            var searchTerm = document.getElementById('courseSearch').value.toLowerCase();
+            var courses = ['c_intro', 'c_intermediate', 'cpp_intro', 'python_intro', 'java_intro', 'web_dev', 'typescript', 'dsa'];
+
+            if (courses.includes(searchTerm)) {
+                openCourse(searchTerm + '.html');
+            } else {
+                alert('Course not found. Please try again.');
+            }
+        }
+
+        function toggleProfileDropdown() {
+            var dropdown = document.getElementById('profileDropdown');
+            dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function displaySuggestions() {
+            var searchTerm = document.getElementById('courseSearch').value.toLowerCase();
+            var courses = ['c_intro', 'c_intermediate', 'cpp_intro', 'python_intro', 'java_intro', 'web_dev', 'typescript', 'dsa'];
+            var suggestions = courses.filter(course => course.includes(searchTerm));
+
+            var suggestionsContainer = document.getElementById('searchSuggestions');
+            suggestionsContainer.innerHTML = '';
+
+            if (suggestions.length > 0) {
+                suggestions.forEach(suggestion => {
+                    var suggestionElement = document.createElement('div');
+                    suggestionElement.classList.add('search-suggestion');
+                    suggestionElement.innerText = suggestion;
+                    suggestionElement.addEventListener('click', function() {
+                        document.getElementById('courseSearch').value = suggestion;
+                        suggestionsContainer.style.display = 'none';
+                        searchCourse();
+                    });
+                    suggestionsContainer.appendChild(suggestionElement);
+                });
+
+                suggestionsContainer.style.display = 'flex';
+            } else {
+                suggestionsContainer.style.display = 'none';
+            }
+        }
+
+        document.getElementById('courseSearch').addEventListener('input', displaySuggestions);
+    </script>
+
+    <div class="back-button-container">
+        <button class="back-button" onclick="goBack()">Back</button>
+    </div>
+
+    <script>
+        function goBack() {
+            parent.window.location.href = 'index.html';
+        }
+</script>
+</body>
+</body>
+
+</html>

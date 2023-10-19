@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcify - All-in-One Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .calculator {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .dashboard-button-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            width: 100%;
+        }
+
+        .dashboard-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .dashboard-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <button onclick="displayDate()">Display Date</button>
+        <button onclick="factorial()">Factorial</button>
+        <button onclick="multiplicationTable()">Multiplication Table</button>
+        <button onclick="sumWithConfirmation()">Sum with Confirmation</button>
+    </div>
+
+    <div class="dashboard-button-container">
+        <button class="dashboard-button" onclick="goToDashboard()">Back</button>
+    </div>
+
+    <script>
+        function displayDate() {
+            var date = new Date().toLocaleDateString();
+            document.getElementById('display').value = date;
+        }
+
+        function factorial() {
+            var number = prompt("Enter a number:");
+            var result = 1;
+            for (var i = 1; i <= number; i++) {
+                result *= i;
+            }
+            alert("Factorial of " + number + " is " + result);
+        }
+
+        function multiplicationTable() {
+            var number = prompt("Enter a number:");
+            var table = "";
+            for (var i = 1; i <= 10; i++) {
+                table += number + " x " + i + " = " + (number * i) + "\n";
+            }
+            alert(table);
+        }
+
+        function sumWithConfirmation() {
+            var number1 = prompt("Enter a number:");
+            var number2 = confirm("Click OK and enter another number:");
+
+            if (number2) {
+                var number2Value = prompt("Enter another number:");
+                var sum = parseInt(number1) + parseInt(number2Value);
+                alert("Sum of " + number1 + " and " + number2Value + " is " + sum);
+            } else {
+                alert("Invalid input. Please try again.");
+            }
+        }
+
+        function goToDashboard() {
+            parent.window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+
+</html>

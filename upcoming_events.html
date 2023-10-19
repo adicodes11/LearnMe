@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Events</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #131417; /* Changed background color */
+            color: #fff; /* Changed text color to white */
+        }
+
+        .timetable {
+            border-collapse: collapse;
+            width: 100%;
+            border: 2px solid #007bff;
+            margin-bottom: 20px;
+        }
+
+        .timetable th, .timetable td {
+            border: 2px solid #007bff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .timetable th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .timetable th.course-title {
+            width: 25%;
+        }
+
+        .timetable th.date-time {
+            width: 25%;
+        }
+
+        .timetable th.instructor {
+            width: 25%;
+        }
+
+        .timetable th.location {
+            width: 25%;
+        }
+
+        .timetable td.course-title {
+            font-weight: bold;
+        }
+
+        .timetable td.date-time, .timetable td.instructor, .timetable td.location {
+            font-style: italic;
+        }
+
+        .back-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-button button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Upcoming Events</h1>
+
+    <table class="timetable">
+        <tr>
+            <th class="course-title">Course Title</th>
+            <th class="date-time">Date & Time</th>
+            <th class="instructor">Instructor</th>
+            <th class="location">Location</th>
+        </tr>
+        <tr>
+            <td class="course-title" rowspan="2">Introduction to C</td>
+            <td class="date-time">Oct 25, 2023<br>2:00 PM - 4:00 PM</td>
+            <td class="instructor">John Doe</td>
+            <td class="location">Online</td>
+        </tr>
+        <tr>
+            <td class="date-time">Oct 26, 2023<br>3:00 PM - 5:00 PM</td>
+            <td class="instructor">Jane Smith</td>
+            <td class="location">Youtube Live</td>
+        </tr>
+        <tr>
+            <td class="course-title" rowspan="2">C Intermediate</td>
+            <td class="date-time">Nov 5, 2023<br>1:00 PM - 3:00 PM</td>
+            <td class="instructor">Bob Johnson</td>
+            <td class="location">Online</td>
+        </tr>
+        <tr>
+            <td class="date-time">Nov 7, 2023<br>2:00 PM - 4:00 PM</td>
+            <td class="instructor">Ella Williams</td>
+            <td class="location">Online</td>
+        </tr>
+        <tr>
+            <td class="course-title">Introduction to Python</td>
+            <td class="date-time">Nov 10, 2023<br>10:00 AM - 12:00 PM</td>
+            <td class="instructor">Sarah Davis</td>
+            <td class="location">LinkedIn Live</td>
+        </tr>
+        <tr>
+            <td class="course-title">Web Development Basics</td>
+            <td class="date-time">Nov 18, 2023<br>3:00 PM - 5:00 PM</td>
+            <td class="instructor">Alex Thompson</td>
+            <td class="location">On site</td>
+        </tr>
+        <!-- Add more timetable entries here -->
+    </table>
+
+    <div class="back-button">
+        <button id="backButton">Back</button>
+    </div>
+
+    <script>
+        document.getElementById('backButton').addEventListener('click', function() {
+            parent.window.location.href = 'dashboard.html'; // Redirect entire page to dashboard
+        });
+    </script>
+
+</body>
+
+</html>

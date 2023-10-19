@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+</head>
+
+<body>
+    <iframe id="videoPlayer" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+
+    <script>
+        window.addEventListener('message', function (event) {
+            var videoUrl = event.data;
+            var videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.src = videoUrl;
+        });
+    </script>
+</body>
+
+</html>

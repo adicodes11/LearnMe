@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnMe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+        }
+
+        .left-panel {
+            flex: 0.15;
+            background-color: #1e1f26;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .right-panel {
+            flex: 1;
+            background-color: #131417;
+            min-height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .signup-button {
+            background-color: #47cf73;
+            color: #000000;
+        }
+
+        .login-button {
+            background-color: #444857;
+            color: #ffffff;
+        }
+
+        .button:hover {
+            filter: brightness(90%);
+        }
+
+        .logo {
+            margin-top: 20px;
+            width: 150px;
+            height: auto;
+            cursor: pointer;
+        }
+
+        .course-button, .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+            color: #fff;
+            border: 2px solid #ff69b4;
+            transition: border-color 0.3s ease-in-out;
+            margin-top: 20px;
+            font-family: inherit;
+        }
+
+        .course-button::before, .nav-button::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease-in-out;
+            z-index: -1;
+        }
+
+        .course-button:hover, .nav-button:hover {
+            border-color: #00bfff;
+        }
+
+        .course-button:hover::before, .nav-button:hover::before {
+            border-color: #00bfff;
+        }
+
+        .social-icons {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            text-decoration: none;
+            color: #ccc;
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.1);
+        }
+
+        .social-icons i {
+            font-size: 30px;
+        }
+
+        .join-us {
+            margin-top: 10px;
+            color: #ccc;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Styles for right panel content */
+        .right-panel-content {
+            text-align: center;
+            color: #fff;
+        }
+
+        .right-panel-content .header {
+            font-size: 48px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .right-panel-content .intro {
+            font-size: 24px;
+            margin: 40px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .right-panel-content .features {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 50px;
+        }
+
+        .right-panel-content .feature {
+            max-width: 300px;
+            padding: 30px 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            transition: transform 0.3s;
+        }
+
+        .right-panel-content .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .right-panel-content .feature .icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .right-panel-content .feature h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .right-panel-content .feature p {
+            font-size: 16px;
+            color: #ccc;
+        }
+
+        .right-panel-content .cta {
+            margin-bottom: 50px;
+        }
+
+        .right-panel-content .cta button {
+            font-size: 18px;
+            padding: 12px 24px;
+            background-color: #47cf73;
+            color: #000000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .right-panel-content .cta button:hover {
+            background-color: #28a745;
+        }
+
+        /* Style for copyright */
+        .copyright {
+            margin-top: auto;
+            color: #ccc;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="left-panel">
+        <a href="index.html">
+            <img class="logo" src="mylogo.png" alt="Logo">
+        </a>
+        <div class="button-container">
+            <button class="button signup-button" onclick="openPage('signup.html')">Sign Up</button>
+            <button class="button login-button" onclick="openPage('login.html')">Log In</button>
+        </div>
+        <button class="button nav-button" onclick="openCourses()">Courses</button>
+        <button class="button nav-button" onclick="openPage('about.html')">About Us</button>
+        <button class="button nav-button" onclick="openPage('contact.html')">Contact Info</button>
+        
+        <div class="social-icons">
+            <div class="join-us">Join Us On</div>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Aditya Chikte
+        </div>
+    </div>
+    <div class="right-panel" id="rightPanel"></div>
+
+    <script>
+
+        function openCourses() {
+                parent.window.location.href = 'explore_courses.html';
+            }
+
+        function openPage(page) {
+            var rightPanel = document.getElementById('rightPanel');
+            rightPanel.innerHTML = '';
+            var iframe = document.createElement('iframe');
+            iframe.src = page;
+            iframe.style.border = 'none';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            rightPanel.appendChild(iframe);
+
+            var signUpButton = document.querySelector('.signup-button');
+            var loginButton = document.querySelector('.login-button');
+
+            if (page === 'signup.html') {
+                signUpButton.style.display = 'none';
+                loginButton.style.display = 'block';
+            } else if (page === 'login.html') {
+                signUpButton.style.display = 'block';
+                loginButton.style.display = 'none';
+            }
+}
+
+    </script>
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var rightPanel = document.getElementById('rightPanel');
+
+            var rightPanelContent = `
+                <div class="right-panel-content">
+                    <div class="header">
+                        <h1>Welcome to LearnMe</h1>
+                        <p>Your Learning Destination</p>
+                    </div>
+
+                    <div class="intro">
+                        <p>Unlock a world of knowledge and skills with LearnMe. Explore our wide range of courses and start learning today!</p>
+                    </div>
+
+                    <div class="features">
+                        <div class="feature">
+                            <div class="icon">&#127891;</div>
+                            <h3>Expert Instructors</h3>
+                            <p>Learn from the best in the industry. Our instructors are experienced professionals.</p>
+                        </div>
+                        <div class="feature">
+                            <div class="icon">&#128218;</div>
+                            <h3>Interactive Learning</h3>
+                            <p>Engage with interactive content, quizzes, and hands-on exercises.</p>
+                        </div>
+                        <div class="feature">
+                            <div class="icon">&#9201;</div>
+                            <h3>Flexible Schedule</h3>
+                            <p>Learn at your own pace. Access courses anytime, anywhere.</p>
+                        </div>
+                    </div>
+
+                    <div class="cta">
+                        <p>Ready to embark on your learning journey?</p>
+                        <button onclick="openCourses('explore_courses.html')">Get Started</button>
+                    </div>
+                </div>
+            `;
+
+            rightPanel.innerHTML = rightPanelContent;
+        });
+    </script>
+</body>
+
+</html>

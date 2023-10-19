@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input, select {
+            width: calc(100% - 16px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            text-align: left;
+        }
+
+        .success-message {
+            color: #28a745;
+            font-size: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .strength-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #ccc;
+            margin: 10px 0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        .weak {
+            background-color: #dc3545;
+        }
+
+        .medium {
+            background-color: #ffc107;
+        }
+
+        .strong {
+            background-color: #28a745;
+        }
+
+        .name-container,
+        .contact-container,
+        .dob-gender-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .name-container .form-group,
+        .contact-container .form-group,
+        .dob-gender-container .form-group {
+            width: 48%;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .radio-group label {
+            margin-right: 10px;
+        }
+
+        .radio-group input[type="radio"] {
+            display: none;
+        }
+
+        .radio-group input[type="radio"]+label {
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .radio-group input[type="radio"]+label:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .radio-group input[type="radio"]:checked+label {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        /* Add this CSS for the animated tick */
+        .animated-tick {
+            border: 2px solid #28a745;
+            border-radius: 50%;
+            border-top: 2px solid transparent;
+            border-right: 2px solid transparent;
+            height: 50px;
+            width: 50px;
+            animation: spin 0.8s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="color: #007bff;">Sign Up</h1>
+        <form id="registrationForm">
+            <div class="name-container">
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" required>
+                    <div class="error-message" id="firstNameError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" required>
+                    <div class="error-message" id="lastNameError"></div>
+                </div>
+            </div>
+            <div class="dob-gender-container">
+                <div class="form-group">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" required>
+                    <div class="error-message" id="dobError"></div>
+                </div>
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male">Male</label>
+                        <input type="radio" id="female" name="gender" value="female" required>
+                        <label for="female">Female</label>
+                    </div>
+                    <div class="error-message" id="genderError"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <select id="city" required>
+                    <option value="" disabled selected>Select your city</option>
+                    <option value="Agra">Agra</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Nagpur">Nagpur</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div class="error-message" id="cityError"></div>
+            </div>
+            <div class="contact-container">
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" required>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Mobile Number:</label>
+                    <input type="tel" id="phone" pattern="[0-9]{10}" required>
+                    <div class="error-message" id="phoneError"></div>
+                </div>
+            </div>
+            <!-- Add Username Section -->
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+                <div class="error-message" id="usernameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+                <div class="error-message" id="passwordError"></div>
+                <div class="strength-bar">
+                    <div class="strength-fill"></div>
+                </div>
+                <div id="passwordRequirements" style="display:none;">
+                    <ul style="list-style: none; padding: 0;">
+                        <li>Include an uppercase and lowercase letter</li>
+                        <li>Include a number</li>
+                        <li>Include one or more of these special characters: .@$!%*#?&</li>
+                        <li>Be between 6 and 100 characters</li>
+                    </ul>
+                </div>
+            </div>
+            <button type="submit" id="submitBtn">Submit</button>
+        </form>
+
+        <div class="success-message" id="successMessage" style="display:none;">
+            <p>Congratulations! Your registration was successful.</p>
+            <div class="animated-tick"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('input', function(event) {
+            const target = event.target;
+
+            if (target.tagName.toLowerCase() === 'input' || target.tagName.toLowerCase() === 'select') {
+                const value = target.value;
+                const id = target.id;
+                const errorId = id + 'Error';
+                const errorElement = document.getElementById(errorId);
+
+                switch(id) {
+                    case 'firstName':
+                        if (value.length < 6 || !/^[A-Za-z]+$/.test(value)) {
+                            errorElement.textContent = 'First Name should contain alphabets and be at least 6 characters long.';
+                        } else {
+                            errorElement.textContent = '';
+                        }
+                        break;
+                    case 'lastName':
+                        if (value.trim() === '' || !/^[A-Za-z]+$/.test(value)) {
+                            errorElement.textContent = 'Last Name should contain alphabets and cannot be empty.';
+                        } else {
+                            errorElement.textContent = '';
+                        }
+                        break;
+                    case 'city':
+                        if (value === '') {
+                            errorElement.textContent = 'Please select your city.';
+                        } else {
+                            errorElement.textContent = '';
+                        }
+                        break;
+                    case 'email':
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(value)) {
+                            errorElement.textContent = 'Invalid email format. Please use name@domain.com.';
+                        } else {
+                            errorElement.textContent = '';
+                        }
+                        break;
+                    case 'phone':
+                        if (value.length !== 10 || !/^\d+$/.test(value)) {
+                            errorElement.textContent = 'Mobile Number should contain exactly 10 digits.';
+                        } else {
+                            errorElement.textContent = '';
+                        }
+                        break;
+                    case 'dob':
+                        if (value === '') {
+                            errorElement.textContent = 'Date of Birth is required.';
+                        } else {
+                            errorElement.textContent = '';
+                        }
+                        break;
+                    case 'male':
+                    case 'female':
+                        const genderError = document.getElementById('genderError');
+                        genderError.textContent = '';
+                        break;
+                    case 'password':
+                        const passwordRequirements = document.getElementById('passwordRequirements');
+                        const strengthBar = document.querySelector('.strength-bar');
+                        const strengthFill = document.querySelector('.strength-fill');
+
+                        const hasUpperCase = /[A-Z]/.test(value);
+                        const hasLowerCase = /[a-z]/.test(value);
+                        const hasNumbers = /\d/.test(value);
+                        const hasSpecialChars = /[.@$!%*#?&><)(^-_]/.test(value);
+                        const isLengthValid = value.length >= 6 && value.length <= 100;
+
+                        const strength = (hasUpperCase + hasLowerCase + hasNumbers + hasSpecialChars + isLengthValid) * 20;
+
+                        strengthFill.style.width = strength + '%';
+
+                        if (strength < 40) {
+                            strengthFill.classList.remove('medium', 'strong');
+                            strengthFill.classList.add('weak');
+                            errorElement.textContent = 'Password is too weak.';
+                            document.getElementById('submitBtn').disabled = true; // Disable submit button
+                        } else if (strength < 80) {
+                            strengthFill.classList.remove('weak', 'strong');
+                            strengthFill.classList.add('medium');
+                            errorElement.textContent = 'Password is of medium strength.';
+                            document.getElementById('submitBtn').disabled = false; // Enable submit button
+                        } else {
+                            strengthFill.classList.remove('weak', 'medium');
+                            strengthFill.classList.add('strong');
+                            errorElement.textContent = '';
+                            document.getElementById('submitBtn').disabled = false; // Enable submit button
+                        }
+
+                        if (!isLengthValid || !(hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChars)) {
+                            passwordRequirements.style.display = 'block';
+                        } else {
+                            passwordRequirements.style.display = 'none';
+                        }
+
+                        // Check if password is less than 6 characters
+                    if (value.length < 6) {
+                        errorElement.textContent = 'Password must be at least 6 characters long.';
+                        document.getElementById('submitBtn').disabled = true; // Disable submit button
+                    }
+                        break;
+                }
+            }
+        });
+
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('registrationForm');
+            const successMessage = document.getElementById('successMessage');
+
+            // Display success message and hide form
+            form.style.display = 'none';
+            successMessage.style.display = 'block';
+
+            // Automatically redirect after 5 seconds
+            setTimeout(function() {
+                parent.window.location.href = 'dashboard.html'; // Replace with your actual dashboard page URL
+            }, 5000);
+            
+        });
+    </script>
+</body>
+
+</html>

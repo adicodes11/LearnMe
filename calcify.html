@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcify</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .calc-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .calc-heading {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .calc-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px; /* Added margin for the buttons */
+        }
+
+        .calc-option {
+            background-color: #ccc;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            min-width: 150px;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .calc-option i {
+            font-size: 36px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .calc-option button {
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 80%;
+        }
+
+        .calc-option button:hover {
+            background-color: #0056b3;
+        }
+
+        .calc-option:hover {
+            transform: scale(1.05);
+        }
+
+        .output-display {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            min-width: 150px;
+            font-size: 20px;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+        }
+
+        .calc-option:hover .output-display {
+            display: block;
+        }
+
+        /* Add margin to the top 4 buttons */
+        .calc-option:nth-child(-n+4) {
+            margin-top: 100px;
+        }
+
+        /* Back button styles */
+        .back-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="calc-container">
+        <h1 class="calc-heading">Calcify</h1>
+        <div class="calc-options">
+            <!-- Age Calculator -->
+            <div class="calc-option">
+                <i class="fas fa-birthday-cake"></i>
+                <button onclick="calculateAge()">Age</button>
+                <div class="output-display" id="output1"></div>
+            </div>
+
+            <!-- Area Calculator -->
+            <div class="calc-option">
+                <i class="fas fa-ruler"></i>
+                <button onclick="calculateArea()">Area</button>
+                <div class="output-display" id="output2"></div>
+            </div>
+
+            <!-- BMI Calculator -->
+            <div class="calc-option">
+                <i class="fas fa-weight"></i>
+                <button onclick="calculateBMI()">BMI</button>
+                <div class="output-display" id="output3"></div>
+            </div>
+
+            <!-- Data Conversion Calculator -->
+            <div class="calc-option">
+                <i class="fas fa-calculator"></i>
+                <button onclick="calculateData()">Data</button>
+                <div class="output-display" id="output4"></div>
+            </div>
+
+            <!-- Date Calculator -->
+            <div class="calc-option">
+                <i class="fas fa-calendar"></i>
+                <button onclick="calculateDate()">Date</button>
+                <div class="output-display" id="output5"></div>
+            </div>
+
+            <!-- Discount Calculator -->
+            <div class="calc-option">
+                <i class="fas fa-percent"></i>
+                <button onclick="calculateDiscount()">Discount</button>
+                <div class="output-display" id="output6"></div>
+            </div>
+
+            <!-- Length Conversion Calculator -->
+            <div class="calc-option">
+                <i class="fas fa-ruler-combined"></i>
+                <button onclick="calculateLength()">Length</button>
+                <div class="output-display" id="output7"></div>
+            </div>
+
+            <!-- Mass Calculator -->
+            <div class="calc-option">
+                <i class="fas fa-weight-hanging"></i>
+                <button onclick="calculateMass()">Mass</button>
+                <div class="output-display" id="output8"></div>
+            </div>
+
+            <!-- Numeral System Conversion Calculator -->
+            <div class="calc-option">
+                <i class="fas fa-binary"></i>
+                <button onclick="calculateNumeralSystem()">Numeral System</button>
+                <div class="output-display" id="output9"></div>
+            </div>
+
+            <!-- Speed Calculator -->
+            <div class="calc-option">
+                <i class="fas fa-tachometer-alt"></i>
+                <button onclick="calculateSpeed()">Speed</button>
+                <div class="output-display" id="output10"></div>
+            </div>
+
+            <!-- Temperature Calculator -->
+            <div class="calc-option">
+                <i class="fas fa-thermometer-half"></i>
+                <button onclick="calculateTemperature()">Temperature</button>
+                <div class="output-display" id="output11"></div>
+            </div>
+
+            <!-- Time Calculator -->
+            <div class="calc-option">
+                <i class="fas fa-stopwatch"></i>
+                <button onclick="calculateTime()">Time</button>
+                <div class="output-display" id="output12"></div>
+            </div>
+
+            <!-- Volume Calculator -->
+            <div class="calc-option">
+                <i class="fas fa-cube"></i>
+                <button onclick="calculateVolume()">Volume</button>
+                <div class="output-display" id="output13"></div>
+            </div>
+
+            <!-- Factorial Calculator -->
+            <div class="calc-option">
+                <i class="fas fa-exclamation"></i>
+                <button onclick="calculateFactorial()">Factorial</button>
+                <div class="output-display" id="output14"></div>
+            </div>
+
+            <!-- Multiplication Table -->
+            <div class="calc-option">
+                <i class="fas fa-table"></i>
+                <button onclick="generateTable()">Multiplication Table</button>
+                <div class="output-display" id="output15"></div>
+            </div>
+
+            <!-- Sum of N Numbers -->
+            <div class="calc-option">
+                <i class="fas fa-plus"></i>
+                <button onclick="calculateSum()">Sum of N Numbers</button>
+                <div class="output-display" id="output16"></div>
+            </div>
+        </div>
+
+        <!-- Add space after the last 4 buttons -->
+        <div style="height: 60px;"></div>
+
+        <!-- Back button -->
+        <button class="back-button" onclick="goBack()">Back</button>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <script>
+        function calculateAge() {
+            let birthYear = prompt("Enter your birth year:");
+            if (birthYear !== null) {
+                let currentYear = new Date().getFullYear();
+                let age = currentYear - parseInt(birthYear);
+                document.getElementById("output1").innerHTML = `Your age is ${age} years.`;
+            }
+        }
+
+        function calculateArea() {
+            // Add your code to calculate area here
+        }
+
+        function calculateBMI() {
+            // Add your code to calculate BMI here
+        }
+
+        function calculateData() {
+            // Add your code to calculate data here
+        }
+
+        function calculateDate() {
+            // Add your code to calculate date here
+        }
+
+        function calculateDiscount() {
+            // Add your code to calculate discount here
+        }
+
+        function calculateLength() {
+            // Add your code to calculate length here
+        }
+
+        function calculateMass() {
+            // Add your code to calculate mass here
+        }
+
+        function calculateNumeralSystem() {
+            // Add your code to calculate numeral system here
+        }
+
+        function calculateSpeed() {
+            // Add your code to calculate speed here
+        }
+
+        function calculateTemperature() {
+            // Add your code to calculate temperature here
+        }
+
+        function calculateTime() {
+            // Add your code to calculate time here
+        }
+
+        function calculateVolume() {
+            // Add your code to calculate volume here
+        }
+
+        function calculateFactorial() {
+            let number = prompt("Enter a positive integer (n) for factorial:");
+            if (number !== null) {
+                number = parseInt(number);
+                if (!isNaN(number) && number >= 0) {
+                    let factorial = 1;
+                    for (let i = 1; i <= number; i++) {
+                        factorial *= i;
+                    }
+                    document.getElementById("output14").innerHTML = `Factorial of ${number} is ${factorial}.`;
+                } else {
+                    alert("Invalid input. Please enter a non-negative integer.");
+                }
+            }
+        }
+
+        function generateTable() {
+            let number = prompt("Enter the number for multiplication table:");
+            if (number !== null) {
+                let table = "<h2>Multiplication Table</h2><ul>";
+                for (let i = 1; i <= 10; i++) {
+                    table += `<li>${number} x ${i} = ${number * i}</li>`;
+                }
+                table += "</ul>";
+                document.getElementById("output15").innerHTML = table;
+            }
+        }
+
+        function calculateSum() {
+            let n = prompt("Enter a positive integer (n) for sum of N numbers:");
+            if (n !== null) {
+                n = parseInt(n);
+                if (!isNaN(n) && n > 0) {
+                    let sum = (n * (n + 1)) / 2;
+                    document.getElementById("output16").innerHTML = `Sum of first ${n} natural numbers is ${sum}.`;
+                } else {
+                    alert("Invalid input. Please enter a positive integer.");
+                }
+            }
+        }
+
+        function goBack() {
+            parent.window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+
+</html>
